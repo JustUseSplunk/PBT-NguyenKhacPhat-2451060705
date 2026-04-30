@@ -119,3 +119,11 @@ Xác thực điều kiện phức tạp (Cross-field validation): Ví dụ: Nế
 Bị tấn công Injection: Kẻ gian bypass frontend và đẩy các đoạn mã độc hại (SQL Injection, Cross-Site Scripting - XSS) trực tiếp vào Database, gây đánh cắp hoặc mất mát dữ liệu toàn bộ hệ thống.
 
 Lưu trữ dữ liệu rác/sai logic: Kẻ tấn công cố tình gửi lên tuổi âm, số dư ngân hàng âm, hoặc sai định dạng. Server không kiểm tra và lưu thẳng vào hệ thống, dẫn đến lỗi crash app diện rộng khi các chức năng khác cố gắng xử lý đống dữ liệu sai lệch này.
+### PHẦN B - THỰC HÀNH CODE
+### Câu B1
+**Trả lời:**
+Tại sao HTML không thể validate "Confirm Password"?
+
+HTML5 validation (required, pattern, minlength,...) chỉ hoạt động trên từng trường dữ liệu độc lập. Nó kiểm tra xem giá trị của ô đó có khớp với một quy tắc tĩnh (Regex hoặc độ dài) hay không.
+
+Việc xác nhận mật khẩu yêu cầu so sánh giá trị của hai trường khác nhau (password vs confirm_password). Đây là logic "so sánh chéo" (Cross-field validation), mà HTML thuần không có thuộc tính nào để tham chiếu giá trị của ô này sang ô kia. Để thực hiện việc này, chúng ta bắt buộc phải dùng JavaScript (sử dụng hàm setCustomValidity()) hoặc kiểm tra ở phía Server-side.
